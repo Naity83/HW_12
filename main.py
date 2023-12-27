@@ -155,8 +155,11 @@ class AddressBook(UserDict):
             pickle.dump(self.data, file)
 
     def read_from_file(self):
-        with open('contacts.pickle', "rb") as file:
-            contacts = pickle.load(file)
+        try:
+            with open('contacts.pickle', "rb") as file:
+                self.data = pickle.load(file)
+        except FileNotFoundError:
+            print("File not found. Creating a new AddressBook.")
         
 
     
